@@ -24,6 +24,6 @@ class RedisCacheConfig extends AbstractConfig
     #[Env('REDIS_CACHE_DATABASE_NUM', default: '0')]
     public int $databaseNum;
 
-    #[Env('REDIS_CACHE_PREFIX', default: 'cache:')]
+    #[Env('REDIS_CACHE_PREFIX', default: 'cache_')]
     public string $prefix;
 }
