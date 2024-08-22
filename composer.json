@@ -1,0 +1,13 @@
+{
+  "name": "anodio/cache",
+  "autoload": {
+    "psr-4": {
+      "Anodio\\Cache\\": "src/"
+    }
+  },
+  "require": {
+    "anodio/core": "^0.1",
+    "symfony/cache": "^7.1",
+    "ext-redis": "*"
+  }
+}
