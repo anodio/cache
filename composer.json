@@ -7,7 +7,6 @@
   },
   "require": {
     "anodio/core": "^0.1",
-    "symfony/cache": "^7.1",
-    "ext-redis": "*"
+    "symfony/cache": "^7.1"
   }
 }
