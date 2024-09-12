@@ -15,9 +15,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CacheClear extends \Symfony\Component\Console\Command\Command
 {
     #[Inject]
-    public AdapterInterface $cacheAdapter;
-
-    #[Inject]
     public RedisCacheConfig $redisCacheConfig;
 
     #[Inject]
