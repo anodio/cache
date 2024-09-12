@@ -6,6 +6,7 @@ use Anodio\Cache\Interfaces\JsonCacheToObjectInterface;
 use Anodio\Cache\Interfaces\ObjectToJsonCacheInterface;
 use Anodio\Core\ContainerStorage;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Symfony\Component\Cache\CacheItem;
 
 class Cache
 {
@@ -32,6 +33,9 @@ class Cache
 
     public static function set(string $key, ObjectToJsonCacheInterface $value, int $ttl = 0): bool
     {
+        if ($ttl === 0) {
+            $ttl = null;
+        }
         $container = ContainerStorage::getContainer();
         $cacheAdapter = $container->get(AdapterInterface::class);
         $item = $cacheAdapter->getItem($key);
