@@ -27,7 +27,8 @@ class CacheServiceProvider implements ServiceProviderInterface
                     \Di\create(\Anodio\Cache\CacheFactories\RedisCacheFactory::class)
                         ->constructor(\Di\get(RedisCacheConfig::class))
                 ),
-            'cacheAdapter'=>\Di\factory([\Di\get('cacheFactory'), 'makeCacheAdapter']),
+//            'cacheAdapter'=>\Di\factory([\Di\get('cacheFactory'), 'makeCacheAdapter']),
+            'cacheAdapter'=>\Di\factory(fn(CacheMultiFactory $cacheFactory) => $cacheFactory->makeCacheAdapter())->parameter('cacheFactory', \Di\get('cacheFactory')),
             AdapterInterface::class=>\Di\get('cacheAdapter'),
             CacheInterface::class=>\Di\get('cacheAdapter'),
             LoggerAwareInterface::class=>\Di\get('cacheAdapter'),
