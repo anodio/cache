@@ -9,6 +9,9 @@ use Anodio\Core\Configuration\Env;
 #[Config(name: 'redisCache')]
 class RedisCacheConfig extends AbstractConfig
 {
+    #[Env('REDIS_CACHE_CONNECTION_STRING', default: '')]
+    public string $connectionString;
+
     #[Env('REDIS_CACHE_HOST', default: '0.0.0.0')]
     public string $host;
 

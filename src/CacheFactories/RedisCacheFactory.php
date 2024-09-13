@@ -22,21 +22,25 @@ class RedisCacheFactory implements FactoryInterface
         if (!extension_loaded('redis')) {
             throw new \Exception('Redis extension is not loaded');
         }
-        $username = ($this->config->username)?:null;
-        $password = ($this->config->password)?:null;
-        $connection = new \Redis(
-            [
-                'host'=>$this->config->host,
-                'port'=>$this->config->port
-            ]
-        );
-        if ($username && $password) {
-            $connection->auth([$username, $password]);
-        } elseif ($password) {
-            $connection->auth($password);
-        }
+        if ($this->config->connectionString==='') {
+            $username = ($this->config->username)?:null;
+            $password = ($this->config->password)?:null;
+            $connection = new \Redis(
+                [
+                    'host'=>$this->config->host,
+                    'port'=>$this->config->port
+                ]
+            );
+            if ($username && $password) {
+                $connection->auth([$username, $password]);
+            } elseif ($password) {
+                $connection->auth($password);
+            }
 
-        $connection->select($this->config->databaseNum);
+            $connection->select($this->config->databaseNum);
+        } else {
+            $connection = \Symfony\Component\Cache\Adapter\RedisAdapter::createConnection($this->config->connectionString);
+        }
 
         return new \Symfony\Component\Cache\Adapter\RedisAdapter($connection, $this->config->prefix);
 
